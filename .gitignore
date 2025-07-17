@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# VS Code
+.vscode/
+
+# MacOS
+.DS_Store
+
+# Jupyter notebooks checkpoints (if used)
+.ipynb_checkpoints/
+
+# Test, coverage, and debug artifacts
+.coverage
+.cache/
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# IDEs and editors
+.idea/
+*.swp
+*.swo
+
+# System files
+Thumbs.db
+ehthumbs.db
