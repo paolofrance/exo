@@ -13,7 +13,7 @@ Make sure the odrive, motors and harware components are set up properly. For odr
     mkdir build
     cd build
     cmake ..
-    make
+    sudo make install
 ```
 
 #### odrive master

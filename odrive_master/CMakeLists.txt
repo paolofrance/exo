@@ -7,6 +7,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../lib/)
 
 find_package(Boost REQUIRED COMPONENTS thread chrono system)
 find_package(Curses REQUIRED)
+find_package(Eigen3 REQUIRED NO_MODULE)
 
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
@@ -24,6 +25,7 @@ include_directories(
     ${Boost_INCLUDE_DIRS} 
     ./include/
     ${CURSES_INCLUDE_DIR}
+    ${EIGEN3_INCLUDE_DIRS}
 ) 
 
 # Defines every source file in the folder 'src'
