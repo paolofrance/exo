@@ -19,7 +19,7 @@ class AdmittanceController(Node):
         m=1.0
         c=0.50
         c_ratio = 0.8
-        k=50.0
+        k=0.0
 
         if k != 0.0 and m != 0.0:
             c = 2 * c_ratio * (m * k) ** 0.5
@@ -113,7 +113,7 @@ class AdmittanceController(Node):
 
         # Publish desired position commands
         pos_msg = Float32MultiArray()
-        pos_msg.data = self.x
+        pos_msg.data = [-self.x[1],self.x[1]]
         self.position_pub.publish(pos_msg)
         
         # pos_msg_f = Float32MultiArray()
