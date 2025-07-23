@@ -1,0 +1,23 @@
+from setuptools import setup
+
+package_name = 'exo_control'
+
+setup(
+    name=package_name,
+    version='0.0.0',
+    packages=[package_name],
+    install_requires=['setuptools'],
+    zip_safe=True,
+    maintainer='Your Name',
+    maintainer_email='you@example.com',
+    description='Exoskeleton control package with C++ and Python nodes.',
+    license='Apache License 2.0',
+    entry_points={
+        'console_scripts': [
+            'exo_control = exo_control.exo_control:main',
+            'admittance_controller = exo_control.admittance_controller:main',
+            'impedance_controller = exo_control.impedance_controller:main',
+            'odrive_calibrator = your_package_name.odrive_calibrator:main',
+        ],
+    },
+)
