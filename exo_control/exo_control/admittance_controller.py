@@ -4,6 +4,10 @@ from rclpy.node import Node
 from std_msgs.msg import Float32MultiArray
 from sensor_msgs.msg import JointState
 import copy
+import time
+from std_msgs.msg import Float32MultiArray
+import math
+
 
 class AdmittanceController(Node):
     def __init__(self):
@@ -15,11 +19,10 @@ class AdmittanceController(Node):
         self.joint_state_sub = self.create_subscription(JointState, 'joint_states', self.joint_state_callback, 10)
         self.external_torque_sub = self.create_subscription(Float32MultiArray, 'external_torque', self.external_torque_callback, 10)
 
-
         m=1.0
         c=0.50
         c_ratio = 0.8
-        k=0.0
+        k=50.0
 
         if k != 0.0 and m != 0.0:
             c = 2 * c_ratio * (m * k) ** 0.5
@@ -56,6 +59,32 @@ class AdmittanceController(Node):
         self.init_positions =True
 
         self.get_logger().info("Admittance controller initialized.")
+
+    def initial_soft_sync(self, x, max_sync_time=3.0, sync_rate=100.0, threshold=0.01, alpha=0.05):
+        dt = 1.0 / sync_rate
+        start_time = time.time()
+
+        self.x = [x[0], x[1]]  # initialize if needed
+
+        while abs(self.x[0] + self.x[1]) > threshold and (time.time() - start_time) < max_sync_time:
+            # Smoothly adjust x[0] to approach -x[1]
+            self.x[0] = (1 - alpha) * self.x[0] + alpha * (-self.x[1])
+
+            # Publish positions
+            pos_msg = Float32MultiArray()
+            pos_msg.data = self.x
+            self.position_pub.publish(pos_msg)
+
+            time.sleep(dt)
+
+        # Final snap to constraint
+        self.x[0] = -self.x[1]
+        pos_msg = Float32MultiArray()
+        pos_msg.data = self.x
+        self.position_pub.publish(pos_msg)
+
+        self.get_logger().info("Initial soft sync complete: x[0] ≈ -x[1]")
+
     
     def apply_deadband_and_saturation(self, values, deadband=0.5, limit=5.0):
         result = []
@@ -90,7 +119,12 @@ class AdmittanceController(Node):
             return
         
         if self.init_positions:
+            
             self.x = list(msg.position[:2])
+            self.get_logger().info("Initial soft sync...")
+            self.initial_soft_sync(self.x,alpha=0.05)
+            self.get_logger().info("synked")
+
             self.x_ref = list(msg.position[:2])
             self.filtered_p = list(msg.position[:2])
             self.filtered_v = list(msg.velocity[:2])
@@ -103,7 +137,7 @@ class AdmittanceController(Node):
         self.measured_pos = list(msg.position[:2])
         self.measured_vel = list(msg.velocity[:2])
         self.measured_eff = list(msg.effort  [:2])
-
+        
         # Admittance dynamics integration for each joint:
         for i in range(2):
             self.a[i] = (self.filtered_e[i] - self.C[i] * self.v[i] - self.K[i] * (self.x[i] - self.x_ref[i])) / self.M[i]
@@ -111,9 +145,19 @@ class AdmittanceController(Node):
             self.v[i] += self.a[i] * self.dt
             self.x[i] += self.v[i] * self.dt
 
+        # if abs(self.x[0] + self.x[1])> 0.01:
+        #     alpha_motor = 0.04
+        #     self.x[0] = (1 - alpha_motor) * self.x[0] + alpha_motor * (-self.x[1])
+        #     self.get_logger().warn("approaching x0 "+ str(abs(self.x[0] + self.x[1])))
+        # else:
+        #     self.x[0]=-self.x[1]
+        #     self.get_logger().debug("following x0")
+
+
         # Publish desired position commands
         pos_msg = Float32MultiArray()
         pos_msg.data = [-self.x[1],self.x[1]]
+        # pos_msg.data = self.x
         self.position_pub.publish(pos_msg)
         
         # pos_msg_f = Float32MultiArray()
