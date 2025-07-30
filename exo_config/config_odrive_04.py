@@ -38,18 +38,28 @@ if __name__ == '__main__':
     odrv0.axis0.controller.config.control_mode = 1
     odrv0.axis1.controller.config.control_mode = 1
     # Input mode (CUSTOM)
-    odrv0.axis0.controller.config.input_mode = 9
-    odrv0.axis1.controller.config.input_mode = 9
+    # odrv0.axis0.controller.config.input_mode = 9
+    # odrv0.axis1.controller.config.input_mode = 9
+    odrv0.axis0.controller.config.input_mode = 5
+    odrv0.axis1.controller.config.input_mode = 5
     # Velocity limit [turn/s]
     odrv0.axis0.controller.config.vel_limit = 10
     odrv0.axis1.controller.config.vel_limit = 10
 
     # Controller gains (tune as needed)
-    odrv0.axis0.controller.config.pos_gain = 20.0
+    # odrv0.axis0.controller.config.pos_gain = 10.0
+    # odrv0.axis0.controller.config.vel_gain = 0.16666667
+    # odrv0.axis0.controller.config.vel_integrator_gain = 0.33333334
+
+    odrv0.axis0.controller.config.pos_gain = 60.0
     odrv0.axis0.controller.config.vel_gain = 0.16666667
     odrv0.axis0.controller.config.vel_integrator_gain = 0.33333334
 
-    odrv0.axis1.controller.config.pos_gain = 20.0
+
+
+
+
+    odrv0.axis1.controller.config.pos_gain = 10.0
     odrv0.axis1.controller.config.vel_gain = 0.16666667
     odrv0.axis1.controller.config.vel_integrator_gain = 0.33333334
 
@@ -58,20 +68,24 @@ if __name__ == '__main__':
     ''' Encoder parameters '''
     odrv0.config.gpio5_mode = 0
     odrv0.config.gpio6_mode = 0
-    odrv0.axis0.encoder.config.abs_spi_cs_gpio_pin = 5
-    odrv0.axis1.encoder.config.abs_spi_cs_gpio_pin = 6
+    odrv0.axis0.encoder.config.abs_spi_cs_gpio_pin = 6
+    odrv0.axis1.encoder.config.abs_spi_cs_gpio_pin = 5
     # CPR
     odrv0.axis0.encoder.config.cpr = 16384
     odrv0.axis1.encoder.config.cpr = 16384
     # Mode (SPI AMS)
     odrv0.axis0.encoder.config.mode = 257
     odrv0.axis1.encoder.config.mode = 257
-
+    
+    odrv0.axis0.encoder.config.bandwidth = 1000
+    odrv0.axis1.encoder.config.bandwidth = 1000
+    
     sleep(0.1)
 
     ''' SEA torque sensor '''
     # odrv0.axis0.torque_sensor.config.enable = False
     # odrv0.axis1.torque_sensor.config.enable = False
+    # sleep(0.1)
 
     ans = input("Config ok!\nSave configuration? [y/N]")
     if ans.upper() == "Y":

@@ -20,6 +20,11 @@ install(PROGRAMS
 )
 
 install(PROGRAMS
+  exo_control/two_boards_exo_control.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
   exo_control/admittance_controller.py
   DESTINATION lib/${PROJECT_NAME}
 )
