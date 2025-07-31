@@ -14,11 +14,9 @@ setup(
     license='Apache License 2.0',
     entry_points={
         'console_scripts': [
-            'exo_control = exo_control.exo_control:main',
             'two_boards_exo_control = exo_control.two_boards_exo_control:main',
             'admittance_controller = exo_control.admittance_controller:main',
-            'impedance_controller = exo_control.impedance_controller:main',
-            'odrive_calibrator = your_package_name.odrive_calibrator:main',
+            'stoop_trajs = exo_control.stoop_trajs:main',
         ],
     },
 )

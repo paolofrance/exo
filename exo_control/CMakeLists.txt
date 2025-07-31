@@ -15,11 +15,6 @@ find_package(sensor_msgs REQUIRED)
 find_package(exo_interfaces REQUIRED)
 
 install(PROGRAMS
-  exo_control/exo_control.py
-  DESTINATION lib/${PROJECT_NAME}
-)
-
-install(PROGRAMS
   exo_control/two_boards_exo_control.py
   DESTINATION lib/${PROJECT_NAME}
 )
@@ -30,14 +25,15 @@ install(PROGRAMS
 )
 
 install(PROGRAMS
-  exo_control/impedance_controller.py
+  exo_control/stoop_trajs.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
 install(PROGRAMS
-  exo_control/odrive_calibrator.py
+  exo_control/traj_client.py
   DESTINATION lib/${PROJECT_NAME}
 )
+
 
 ament_package()
 
