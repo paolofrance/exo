@@ -1,1 +1,0 @@
-/home/paolofranceschi/exo_ros2/src/exo/build/exo_control/ament_cmake_core/exo_controlConfig.cmake

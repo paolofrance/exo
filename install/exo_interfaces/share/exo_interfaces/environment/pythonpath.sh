@@ -1,1 +1,0 @@
-/home/paolofranceschi/exo_ros2/src/exo/build/exo_interfaces/ament_cmake_environment_hooks/pythonpath.sh

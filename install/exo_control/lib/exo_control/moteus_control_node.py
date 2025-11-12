@@ -1,1 +1,0 @@
-/home/paolofranceschi/exo_ros2/src/exo/exo_control/exo_control/moteus_control_node.py

@@ -1,1 +1,0 @@
-/home/paolofranceschi/exo_ros2/src/exo/build/exo_interfaces/ament_cmake_core/exo_interfacesConfig-version.cmake

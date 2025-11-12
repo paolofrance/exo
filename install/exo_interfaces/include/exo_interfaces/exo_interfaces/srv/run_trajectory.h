@@ -1,1 +1,0 @@
-/home/paolofranceschi/exo_ros2/src/exo/build/exo_interfaces/rosidl_generator_c/exo_interfaces/srv/run_trajectory.h

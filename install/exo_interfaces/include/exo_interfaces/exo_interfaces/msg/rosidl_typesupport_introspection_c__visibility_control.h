@@ -1,1 +1,0 @@
-/home/paolofranceschi/exo_ros2/src/exo/build/exo_interfaces/rosidl_typesupport_introspection_c/exo_interfaces/msg/rosidl_typesupport_introspection_c__visibility_control.h
