@@ -1,0 +1,1 @@
+/home/paolofranceschi/exo_ros2/src/exo/exo_control/exo_control/two_boards_exo_control.py

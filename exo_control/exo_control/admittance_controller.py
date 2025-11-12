@@ -29,8 +29,8 @@ class AdmittanceController(Node):
 
         self.M = 2.5
         self.C = 1.50
-        self.C_ratio = 0.9
-        self.K = 50.0
+        self.C_ratio = 0.2
+        self.K = 0.0
 
         if self.K != 0.0 and self.M != 0.0:
             self.C = 2 * self.C_ratio * (self.K * self.M) ** 0.5
@@ -160,8 +160,8 @@ class AdmittanceController(Node):
             self.v[i] += self.a[i] * self.dt
             self.x[i] += self.v[i] * self.dt
 
-        theta_ref_l = copy.deepcopy(-self.x[1])
-        theta_ref_r = copy.deepcopy(self.x[1])
+        theta_ref_l = copy.deepcopy(self.x[1])
+        theta_ref_r = copy.deepcopy(-self.x[1])
 
         pos_msg = Float32MultiArray()
         pos_msg.data = [theta_ref_l, theta_ref_r]

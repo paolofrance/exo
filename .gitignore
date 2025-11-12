@@ -10,6 +10,8 @@ dist/
 build/
 *.log
 
+moteus/
+
 # Virtual environment
 venv/
 env/

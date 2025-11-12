@@ -34,8 +34,15 @@ install(PROGRAMS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  exo_control/moteus_control_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  exo_control/mock_trajectory_publisher.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 
 ament_package()
-
-
-
