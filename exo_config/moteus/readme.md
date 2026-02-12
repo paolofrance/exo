@@ -11,6 +11,9 @@
 
 python3 -m moteus_gui.tview
 
+conf get id.id
+conf set id.id xxx
+
 d stop
 
 conf set servopos.position_min nan

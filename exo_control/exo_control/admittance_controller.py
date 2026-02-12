@@ -29,8 +29,8 @@ class AdmittanceController(Node):
 
         self.M = 2.5
         self.C = 1.50
-        self.C_ratio = 0.2
-        self.K = 0.0
+        self.C_ratio = 0.5
+        self.K = 100.0
 
         if self.K != 0.0 and self.M != 0.0:
             self.C = 2 * self.C_ratio * (self.K * self.M) ** 0.5
